@@ -98,6 +98,7 @@ function setupRestartButton(): void {
     prevLap = gameState.currentLap;
     prevIsColliding = false;
     prevIsBoosting = false;
+    lapStartTime = 0;
     isGameRunning = true;
   });
 }
