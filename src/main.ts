@@ -18,7 +18,7 @@ import {
   resumeGame,
   resetRace,
 } from './game/gameState.js';
-import { createHUD, updateHUD } from './ui/hud.js';
+import { createHUD, updateHUD, showLapTime } from './ui/hud.js';
 import { createMinimap, updateMinimap } from './ui/minimap.js';
 import {
   createAudioSystem,
@@ -59,6 +59,7 @@ let prevIsColliding = false;
 let prevIsBoosting = false;
 let prevLap = 1;
 let isGameRunning = false;
+let lapStartTime = 0;
 
 startGameLoop(update, render);
 
@@ -148,6 +149,9 @@ function update(dt: number): void {
 
   if (gameState.currentLap > prevLap) {
     playLapChime(audioSystem);
+    const lapTime = gameState.raceTime - lapStartTime;
+    showLapTime(hud, prevLap, lapTime);
+    lapStartTime = gameState.raceTime;
   }
   prevLap = gameState.currentLap;
 

@@ -96,10 +96,9 @@ test.describe('Racing Game', () => {
     expect(speed).toBeGreaterThan(0);
   });
 
-  test('obstacle count is between 5 and 8', async ({ page }) => {
+  test('obstacle count is zero (obstacles removed)', async ({ page }) => {
     const obstacleCount = await page.evaluate(() => (window as any).__DEBUG__.obstacleCount);
-    expect(obstacleCount).toBeGreaterThanOrEqual(5);
-    expect(obstacleCount).toBeLessThanOrEqual(8);
+    expect(obstacleCount).toBe(0);
   });
 
   test('debug panel appears with ?debug param', async ({ page }) => {

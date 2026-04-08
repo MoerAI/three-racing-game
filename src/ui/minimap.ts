@@ -102,7 +102,7 @@ export function updateMinimap(
   ctx.beginPath();
   ctx.moveTo(carPx, carPy);
   ctx.lineTo(
-    carPx + Math.sin(carRotationY) * arrowLen,
+    carPx - Math.sin(carRotationY) * arrowLen,
     carPy + Math.cos(carRotationY) * arrowLen,
   );
   ctx.stroke();

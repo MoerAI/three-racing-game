@@ -225,9 +225,9 @@ export function createTrack(scene: THREE.Scene): TrackData {
   scene.add(trackMesh);
 
   const wallMeshes = buildWalls(spline, scene);
-  const obstacleMeshes = buildObstacles(spline, scene);
+  const obstacleMeshes: THREE.Mesh[] = [];
 
-  window.__DEBUG__.obstacleCount = obstacleMeshes.length;
+  window.__DEBUG__.obstacleCount = 0;
 
   return {
     spline,

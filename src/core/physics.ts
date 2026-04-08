@@ -76,7 +76,7 @@ export function updatePosition(state: PhysicsState, dt: number): PhysicsState {
     return state;
   }
 
-  const dx = Math.sin(state.rotation) * state.speed * dt;
+  const dx = -Math.sin(state.rotation) * state.speed * dt;
   const dz = Math.cos(state.rotation) * state.speed * dt;
 
   return {
@@ -127,9 +127,9 @@ export function updatePhysics(
 
   let steerDirection = 0;
   if (input.left) {
-    steerDirection = -config.steerSpeed;
-  } else if (input.right) {
     steerDirection = config.steerSpeed;
+  } else if (input.right) {
+    steerDirection = -config.steerSpeed;
   }
 
   next = applySteering(next, steerDirection, effectiveGrip, dt);
