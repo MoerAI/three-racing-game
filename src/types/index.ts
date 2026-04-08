@@ -67,5 +67,6 @@ export interface DebugState {
 declare global {
   interface Window {
     __DEBUG__: DebugState;
+    __stats?: { begin(): void; end(): void; dom: HTMLElement; showPanel(id: number): void };
   }
 }

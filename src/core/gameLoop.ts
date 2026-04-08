@@ -28,7 +28,7 @@ export function startGameLoop(update: UpdateFn, render: RenderFn): void {
       const stats = new Stats();
       stats.showPanel(0);
       document.body.appendChild(stats.dom);
-      (window as any).__stats = stats;
+      window.__stats = stats;
     });
   }
 
@@ -42,7 +42,7 @@ export function startGameLoop(update: UpdateFn, render: RenderFn): void {
 
     if (dt > 0.1) dt = 0.1;
 
-    if ((window as any).__stats) (window as any).__stats.begin();
+    if (window.__stats) window.__stats.begin();
 
     accumulator += dt;
     while (accumulator >= FIXED_STEP) {
@@ -52,7 +52,7 @@ export function startGameLoop(update: UpdateFn, render: RenderFn): void {
 
     render();
 
-    if ((window as any).__stats) (window as any).__stats.end();
+    if (window.__stats) window.__stats.end();
 
     frameCount++;
     fpsTimer += dt;
