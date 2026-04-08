@@ -39,7 +39,7 @@ export function checkCollisions(
   for (const angleOffset of rayAngles) {
     const worldAngle = carRotationY + angleOffset;
     const direction = new THREE.Vector3(
-      -Math.sin(worldAngle),
+      Math.sin(worldAngle),
       0,
       Math.cos(worldAngle),
     );
@@ -83,7 +83,7 @@ export function applyCollisionResponse(
       speed *= 0.3;
     } else {
       // Slide-along-wall: project velocity onto wall surface
-      const velX = -Math.sin(rotation) * speed;
+      const velX = Math.sin(rotation) * speed;
       const velZ = Math.cos(rotation) * speed;
       const normalX = collisionResult.normal.x;
       const normalZ = collisionResult.normal.z;
@@ -93,7 +93,7 @@ export function applyCollisionResponse(
       const slideMagnitude = Math.sqrt(slideX * slideX + slideZ * slideZ);
       speed = slideMagnitude * 0.8;
       if (slideMagnitude > 0.1) {
-        rotation = Math.atan2(-slideX, slideZ);
+        rotation = Math.atan2(slideX, slideZ);
       }
       // Push car out of wall
       position = {

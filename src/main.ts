@@ -44,6 +44,15 @@ const chaseCamera = createChaseCamera(camera);
 const inputManager = createInputManager();
 const collisionSystem = createCollisionSystem(trackData.wallMeshes, trackData.obstacleMeshes);
 const integrationState = createIntegration();
+
+const trackStartPoint = trackData.spline.getPointAt(0);
+const trackStartTangent = trackData.spline.getTangentAt(0);
+const trackStartRotation = Math.atan2(trackStartTangent.x, trackStartTangent.z);
+carData.group.position.set(trackStartPoint.x, 0.25, trackStartPoint.z);
+carData.group.rotation.y = trackStartRotation;
+integrationState.physicsState.position = { x: trackStartPoint.x, z: trackStartPoint.z };
+integrationState.physicsState.rotation = trackStartRotation;
+
 const hud = createHUD();
 const minimap = createMinimap(trackData.spline);
 const audioSystem = createAudioSystem();
@@ -54,7 +63,7 @@ const pauseOverlay = createPauseOverlay();
 const finishScreenOverlay = createFinishScreen();
 
 let gameState = createGameState({ totalLaps: 3, checkpointCount: 3 });
-let checkpointSystem = createCheckpointSystem(scene, trackData.spline, gameState);
+let checkpointSystem = createCheckpointSystem(scene, trackData.spline, gameState, trackData.trackWidth);
 let prevIsColliding = false;
 let prevIsBoosting = false;
 let prevLap = 1;
@@ -89,12 +98,14 @@ function setupRestartButton(): void {
   document.getElementById('restart-btn')?.addEventListener('click', () => {
     finishScreenOverlay.el.style.display = 'none';
     integrationState.physicsState = createDefaultPhysicsState();
-    carData.group.position.set(0, 0.25, 0);
-    carData.group.rotation.y = 0;
+    integrationState.physicsState.position = { x: trackStartPoint.x, z: trackStartPoint.z };
+    integrationState.physicsState.rotation = trackStartRotation;
+    carData.group.position.set(trackStartPoint.x, 0.25, trackStartPoint.z);
+    carData.group.rotation.y = trackStartRotation;
     gameState = resetRace(createGameState({ totalLaps: 3, checkpointCount: 3 }));
     gameState = startRace(gameState);
     gameState = startPlaying(gameState);
-    checkpointSystem = createCheckpointSystem(scene, trackData.spline, gameState);
+    checkpointSystem = createCheckpointSystem(scene, trackData.spline, gameState, trackData.trackWidth);
     prevLap = gameState.currentLap;
     prevIsColliding = false;
     prevIsBoosting = false;

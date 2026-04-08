@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import type { GameState } from '../types/index.js';
 import { crossCheckpoint, completeLap, finishRace } from './gameState.js';
+import { getClosestPointOnSpline } from './track.js';
 
 interface Checkpoint {
   position: THREE.Vector3;
@@ -14,12 +15,14 @@ export interface CheckpointSystem {
   finishLine: THREE.Group;
   gameState: GameState;
   lastFinishDot: number;
+  trackHalfWidth: number;
 }
 
 export function createCheckpointSystem(
   scene: THREE.Scene,
   spline: THREE.CatmullRomCurve3,
   initialGameState: GameState,
+  trackWidth: number = 20,
 ): CheckpointSystem {
   const checkpointTs = [0.25, 0.5, 0.75];
   const checkpoints: Checkpoint[] = checkpointTs.map((t, index) => {
@@ -40,6 +43,7 @@ export function createCheckpointSystem(
     finishLine,
     gameState: initialGameState,
     lastFinishDot: 0,
+    trackHalfWidth: trackWidth / 2,
   };
 }
 
@@ -85,6 +89,9 @@ export function updateCheckpoints(
   if (gameState.status !== 'playing') return gameState;
 
   const carPos2D = new THREE.Vector3(carPosition.x, 0, carPosition.z);
+
+  const closest = getClosestPointOnSpline(carPos2D, spline);
+  if (closest.distance > checkpointSystem.trackHalfWidth) return gameState;
 
   for (const checkpoint of checkpointSystem.checkpoints) {
     const toCarVec = carPos2D.clone().sub(checkpoint.position);
