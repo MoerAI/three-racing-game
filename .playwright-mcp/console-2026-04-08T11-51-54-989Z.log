@@ -1,0 +1,2 @@
+[     188ms] [LOG] Racing Game initialized {carPosition: Object, carSpeed: 0, currentLap: 1, checkpointsCrossed: 0, fps: 0} @ http://localhost:5173/src/main.ts:154
+[     359ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5173/favicon.ico:0

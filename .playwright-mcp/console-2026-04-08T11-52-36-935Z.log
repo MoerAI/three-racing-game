@@ -1,0 +1,4 @@
+[     107ms] [LOG] Racing Game initialized {carPosition: Object, carSpeed: 0, currentLap: 1, checkpointsCrossed: 0, fps: 0} @ http://localhost:5173/src/main.ts:154
+[   68846ms] [LOG] Racing Game initialized {carPosition: Object, carSpeed: 0, currentLap: 1, checkpointsCrossed: 0, fps: 0} @ http://localhost:5173/src/main.ts:154
+[   98630ms] [LOG] Racing Game initialized {carPosition: Object, carSpeed: 0, currentLap: 1, checkpointsCrossed: 0, fps: 0} @ http://localhost:5173/src/main.ts:154
+[  266826ms] [LOG] Racing Game initialized {carPosition: Object, carSpeed: 0, currentLap: 1, checkpointsCrossed: 0, fps: 0} @ http://localhost:5173/src/main.ts:154

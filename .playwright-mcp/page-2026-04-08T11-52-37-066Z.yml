@@ -1,0 +1,9 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic: 0 km/h
+    - generic: Lap 1/3
+    - generic: 00:00.00
+  - generic [ref=e4]:
+    - heading "🏎️ Racing Game" [level=1] [ref=e5]
+    - paragraph [ref=e6]: WASD to drive · Shift to drift · Space to boost
+    - button "Click to Start" [ref=e7] [cursor=pointer]
