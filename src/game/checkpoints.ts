@@ -97,7 +97,7 @@ export function updateCheckpoints(
     const toCarVec = carPos2D.clone().sub(checkpoint.position);
     const currentDot = toCarVec.dot(checkpoint.normal);
 
-    if (checkpoint.lastDot > 0 && currentDot <= 0) {
+    if (checkpoint.lastDot < 0 && currentDot >= 0) {
       gameState = crossCheckpoint(gameState, checkpoint.id);
     }
 
@@ -110,7 +110,7 @@ export function updateCheckpoints(
   const toCarFinish = carPos2D.clone().sub(finishPos2D);
   const finishDot = toCarFinish.dot(finishNormal);
 
-  if (checkpointSystem.lastFinishDot > 0 && finishDot <= 0) {
+  if (checkpointSystem.lastFinishDot < 0 && finishDot >= 0) {
     const allCheckpointsCrossed =
       gameState.checkpointsCrossed >= checkpointSystem.checkpoints.length;
     if (allCheckpointsCrossed) {

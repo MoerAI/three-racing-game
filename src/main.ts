@@ -131,6 +131,7 @@ function update(dt: number): void {
   );
 
   gameState = updateTimer(gameState, dt);
+  checkpointSystem.gameState = gameState;
   gameState = updateCheckpoints(checkpointSystem, carData.group.position, trackData.spline);
 
   window.__DEBUG__.currentLap = gameState.currentLap;
